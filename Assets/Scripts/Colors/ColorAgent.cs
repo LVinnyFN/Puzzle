@@ -5,29 +5,38 @@ using UnityEngine;
 public class ColorAgent : MonoBehaviour
 {
     [SerializeField] private Color color;
-    [SerializeField] private Material material;
-    public Color MyColor { get { return color; } set { color = value; material.color = color; }}
+    [SerializeField] private Renderer rend;
+    public Color MyColor => color;
 
     private void Awake()
     {
         SetColor(color);
     }
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
-        SetColor(color);
+        try
+        {
+            Material material = new Material(rend.sharedMaterial);
+            material.color = color;
+            rend.material = material;
+        }
+        catch { }
     }
 
     public void AddColor(Color color)
     {
-        MyColor = ColorManager.Instance.AddColor(this.color, color);
+        this.color = ColorManager.Instance.AddColor(this.color, color);
+        rend.sharedMaterial.color = this.color;
     }
     public void SubtractColor(Color color)
     {
-        MyColor = ColorManager.Instance.SubtractColor(this.color, color);
+        this.color = ColorManager.Instance.SubtractColor(this.color, color);
+        rend.sharedMaterial.color = this.color;
     }
 
     public void SetColor(Color color)
     {
-        MyColor = color;
+        this.color = color;
+        rend.sharedMaterial.color = this.color;
     }    
 }

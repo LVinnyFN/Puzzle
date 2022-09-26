@@ -93,6 +93,20 @@ Transform:
   m_Father: {fileID: 6113352741113866399}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5397505545482834955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305445843642061875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1618d4b8bff6a4eb543aecafcc3f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  material: {fileID: 2100000, guid: 65571388dbe6b5d4ca44618ef29d16fb, type: 2}
 --- !u!1 &6799260014767873537
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +117,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6113352741113866399}
   - component: {fileID: 4046435845675105239}
-  - component: {fileID: 5506542061419271076}
   - component: {fileID: 80655838973861752}
   m_Layer: 0
   m_Name: TruckPrefab
@@ -163,20 +176,6 @@ MonoBehaviour:
   rps: 0
   yAngle: 0
   steerEulerAngles: {x: 0, y: 0, z: 0}
---- !u!114 &5506542061419271076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6799260014767873537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1618d4b8bff6a4eb543aecafcc3f0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
-  material: {fileID: 2100000, guid: 65571388dbe6b5d4ca44618ef29d16fb, type: 2}
 --- !u!65 &80655838973861752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -534,6 +533,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c3a8f5bedfd1ee419457c45f83974ce, type: 3}
+--- !u!1 &6305445843642061875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1c3a8f5bedfd1ee419457c45f83974ce, type: 3}
+  m_PrefabInstance: {fileID: 6575282152012949858}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6686333870856457865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1c3a8f5bedfd1ee419457c45f83974ce, type: 3}

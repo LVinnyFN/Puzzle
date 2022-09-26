@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 5599955042935264866}
   - component: {fileID: 5599955042935264867}
   - component: {fileID: 2647154723594156798}
-  - component: {fileID: 556600376712658677}
+  - component: {fileID: 5157739984244073456}
   m_Layer: 0
   m_Name: Adder
   m_TagString: Untagged
@@ -279,16 +279,17 @@ MonoBehaviour:
   coloredObjects:
   - {fileID: 6544513861687104693}
   - {fileID: 2899442960140448227}
---- !u!135 &556600376712658677
-SphereCollider:
+--- !u!136 &5157739984244073456
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5599955042935264868}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.75
-  m_Center: {x: 0, y: 0.01, z: 0}
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

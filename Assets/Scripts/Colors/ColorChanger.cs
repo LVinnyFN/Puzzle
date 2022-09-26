@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ColorChanger : MonoBehaviour
+public class ColorChanger : ColorManipulator
 {
     enum Operator
     {
@@ -10,14 +10,10 @@ public class ColorChanger : MonoBehaviour
     }
 
     [SerializeField] private Operator operation;
-    [SerializeField] private Color color;
-
-    [Header("Objects")]
-    [SerializeField] private Renderer[] coloredObjects;
 
     private void Awake()
     {
-        SetOwnColor(color);
+        SetOwnColor(manipulatedColor);
     }
     private void OnValidate()
     {
@@ -26,7 +22,7 @@ public class ColorChanger : MonoBehaviour
             try
             {
                 Material material = new Material(renderer.sharedMaterial);
-                material.color = color;
+                material.color = manipulatedColor;
                 renderer.material = material;
             }
             catch { }
@@ -35,12 +31,9 @@ public class ColorChanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("TruckLoad") && other.TryGetComponent(out ColorAgent agent))
         {
-            if (other.gameObject.TryGetComponent(out ColorAgent agent))
-            {
-                ChangeColor(agent);
-            }
+            ChangeColor(agent);
         }
     }
 
@@ -49,13 +42,13 @@ public class ColorChanger : MonoBehaviour
         switch (operation)
         {
             case Operator.Add:
-                agent.AddColor(color);
+                agent.AddColor(manipulatedColor);
                 break;
             case Operator.Subtract:
-                agent.SubtractColor(color);
+                agent.SubtractColor(manipulatedColor);
                 break;
             case Operator.Set:
-                agent.SetColor(color);
+                agent.SetColor(manipulatedColor);
                 break;
         }
     }
