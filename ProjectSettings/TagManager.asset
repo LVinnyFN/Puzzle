@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Level
   - TruckLoad
+  - GroundLoad
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Truck
+  - Load
   - 
   - 
   - 

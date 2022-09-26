@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Load")]
+    public GameObject truckLoad;
+    public GameObject groundLoad;
+    public Transform unloadSpot;
+    public Transform loadSpot;
+    [Header("Stats")]
     public float speed;
     public float steerSpeed;
     public float steerInput;
@@ -18,8 +24,16 @@ public class PlayerController : MonoBehaviour
     [Header("Debug")]
     public float angularVelocity;
     public float rps;
-    public float yAngle;
-    public Vector3 steerEulerAngles;
+    public float wheelYAngle;
+
+    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(unloadSpot.position, 0.2f);
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(loadSpot.position, 0.2f);
+    }
 
     void Update()
     {
@@ -35,10 +49,67 @@ public class PlayerController : MonoBehaviour
         {       
             rotatingWheels[i].Rotate(Vector3.right, angularVelocity, Space.Self);
         }
-        yAngle = Mathf.Lerp(0, maxSteerAngle * steerInput, Mathf.Abs(steerInput));
+        wheelYAngle = Mathf.Lerp(0, maxSteerAngle * steerInput, Mathf.Abs(steerInput));
         for (int i = 0; i < steerWheels.Length; i++)
         {
-            steerWheels[i].localRotation = Quaternion.Euler(steerWheels[i].localRotation.x, yAngle, 0);
+            steerWheels[i].localRotation = Quaternion.Euler(steerWheels[i].localRotation.x, wheelYAngle, 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F)) LoadOrUnload();
+    }
+
+    public void LoadOrUnload()
+    {
+        if (truckLoad)
+        {
+            Unload();
+        }
+        else if (groundLoad)
+        {
+            Load();
+        }
+    }
+
+    public void Unload()
+    {
+        if (truckLoad)
+        {
+            truckLoad.transform.SetParent(null);
+            truckLoad.transform.position = unloadSpot.position;
+
+            groundLoad = truckLoad;
+            truckLoad = null;
+        }
+    }
+
+    public void Load()
+    {
+        if (groundLoad)
+        {
+            groundLoad.transform.SetParent(transform);
+            groundLoad.transform.localPosition = loadSpot.localPosition;
+            groundLoad.transform.localRotation = Quaternion.identity;
+
+            truckLoad = groundLoad;
+            groundLoad = null;
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Enter Coll");
+        if (other.CompareTag("TruckLoad"))
+        {
+        Debug.Log("Enter Truck Coll");
+            groundLoad = other.gameObject;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("TruckLoad"))
+        {
+            groundLoad = null;
         }
     }
 }
