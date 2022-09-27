@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Load")]
     public GameObject truckLoad;
     public GameObject groundLoad;
-    public Transform unloadSpot;
+    public Transform[] unloadSpots;
     public Transform loadSpot;
     [Header("Stats")]
     public float speed;
@@ -26,16 +26,12 @@ public class PlayerController : MonoBehaviour
     public float rps;
     public float wheelYAngle;
 
-    
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(unloadSpot.position, 0.2f);
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(loadSpot.position, 0.2f);
-    }
 
-    void Update()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F)) LoadOrUnload();
+    }
+    private void FixedUpdate()
     {
         accelerationInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");
@@ -54,8 +50,6 @@ public class PlayerController : MonoBehaviour
         {
             steerWheels[i].localRotation = Quaternion.Euler(steerWheels[i].localRotation.x, wheelYAngle, 0);
         }
-
-        if (Input.GetKeyDown(KeyCode.F)) LoadOrUnload();
     }
 
     public void LoadOrUnload()
@@ -74,11 +68,25 @@ public class PlayerController : MonoBehaviour
     {
         if (truckLoad)
         {
-            truckLoad.transform.SetParent(null);
-            truckLoad.transform.position = unloadSpot.position;
+            float range = 1f;
+            int layerMask = LayerMask.GetMask("Scene");
+            Transform unloadSpot = null;
+            for (int i = 0; i < unloadSpots.Length; i++)
+            {
+                if (Physics.OverlapSphere(unloadSpots[i].position, range, layerMask).Length == 0)
+                {
+                    unloadSpot = unloadSpots[i];
+                    break;
+                }
+            }
 
-            groundLoad = truckLoad;
-            truckLoad = null;
+            if (unloadSpot)
+            {
+                truckLoad.transform.SetParent(null);
+                truckLoad.transform.position = unloadSpot.position;
+                groundLoad = truckLoad;
+                truckLoad = null;
+            }
         }
     }
 
@@ -97,10 +105,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Enter Coll");
         if (other.CompareTag("TruckLoad"))
         {
-        Debug.Log("Enter Truck Coll");
             groundLoad = other.gameObject;
         }
     }
