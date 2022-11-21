@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorDoor : MonoBehaviour
+public class ColorDoor : ColorAgent
 {
     public GameObject doorFrame;
     public Vector3 closedSpot, openOffset;
     public bool isOpen;
-    public bool isMoving;
+    private bool isMoving;
     [Range(0,1)]public float openPercentage;
     [Min(0)]public float openingDuration;
 

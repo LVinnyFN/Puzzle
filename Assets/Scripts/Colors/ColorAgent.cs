@@ -33,6 +33,6 @@ public class ColorAgent : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = color;
-        Gizmos.DrawWireMesh(rend.GetComponent<MeshFilter>().sharedMesh, transform.position, transform.rotation);        
+        Gizmos.DrawWireMesh(rend.GetComponent<MeshFilter>().sharedMesh, rend.transform.position, rend.transform.rotation, rend.transform.localScale);        
     }
 }

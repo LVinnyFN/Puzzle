@@ -12,7 +12,13 @@ public static class SceneLoader
     {
         currentChapter = chapter;
         currentLevel = level;
-        SceneManager.LoadScene(chapter + level + 1);
+
+        int sceneIndex = chapter + level + 1;
+        if (sceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(chapter + level + 1);
+        }
+        else LoadMainMenu();
     }
     public static void ReloadLevel() => LoadLevel(currentChapter, currentLevel);
 

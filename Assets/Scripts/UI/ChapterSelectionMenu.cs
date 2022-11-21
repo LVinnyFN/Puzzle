@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class ChapterSelectionMenu : Menu
 {
     [Header("Configs")]
-    public int[] levelsPerChapter;
-    public int chapters => levelsPerChapter.Length;
-    public static string chapterBaseName = "Chapter";
+    public ChapterConfig[] chapterConfigs;
+    public int chapters => chapterConfigs.Length;
 
     [Header("Buttons")]
     public LayoutGroup chapterButtonsLayout;
@@ -27,11 +26,11 @@ public class ChapterSelectionMenu : Menu
         {
             foreach (LevelSelectionMenu levelSelectionMenu in levelSelectionMenuList)
             {
-                if(levelSelectionMenu.gameObject) DestroyImmediate(levelSelectionMenu.gameObject);
+                if(levelSelectionMenu) DestroyImmediate(levelSelectionMenu.gameObject);
             }
             foreach (TextMeshButton button in chapterButtonList)
             {
-                if(button.gameObject) DestroyImmediate(button.gameObject);
+                if(button) DestroyImmediate(button.gameObject);
             }
             levelSelectionMenuList.Clear();
             chapterButtonList.Clear();
@@ -42,7 +41,7 @@ public class ChapterSelectionMenu : Menu
             {
                 AddButton();
                 LevelSelectionMenu levelSelectionMenu = AddLevelSelectionMenu();
-                for (int j = 0; j < levelsPerChapter[i]; j++)
+                for (int j = 0; j < chapterConfigs[i].levels; j++)
                 {
                     int chapter = i, level = j;
                     levelSelectionMenu.chapter = chapter;
@@ -56,7 +55,7 @@ public class ChapterSelectionMenu : Menu
     {
         TextMeshButton button = Instantiate(chapterButtonPrefab, chapterButtonsLayout.transform);
         int menuIndex = chapterButtonList.Count;
-        button.SetText($"{chapterBaseName} {menuIndex + 1}");
+        button.SetText($"{chapterConfigs[menuIndex].name}");
         button.AddClickListener(() => ActivateLevelSelectionMenu(menuIndex));
 
         chapterButtonList.Add(button);
@@ -122,4 +121,11 @@ public class ChapterSelectionMenu : Menu
     }
 
     public void SetChapterSelectionActive(bool state) => chapterButtonsLayout.gameObject.SetActive(state);
+}
+
+[System.Serializable]
+public struct ChapterConfig
+{
+    public string name;
+    public int levels;
 }

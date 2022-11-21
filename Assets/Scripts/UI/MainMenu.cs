@@ -11,7 +11,7 @@ public enum MenuScreen
 public class MainMenu : MonoBehaviour
 {
     [Header("Menus")]
-    public Menu mainMenu;
+    public Menu startMenu;
     public ChapterSelectionMenu chapterSelectionMenu;
     private Menu[] menus;
 
@@ -19,11 +19,12 @@ public class MainMenu : MonoBehaviour
     {
         menus = new Menu[2]
         {
-            mainMenu,
+            startMenu,
             chapterSelectionMenu,
         };
 
-        foreach(var menu in menus)
+        chapterSelectionMenu.RegenerateInterface();
+        foreach (var menu in menus)
         {
             menu.Initialize();
             menu.mainMenu = this;
