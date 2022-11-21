@@ -145,8 +145,8 @@ GameObject:
   - component: {fileID: 1378754851191877179}
   - component: {fileID: 1378754851191877174}
   - component: {fileID: 1378754851191877177}
-  - component: {fileID: 1378754851191877176}
-  - component: {fileID: 3744309898233183442}
+  - component: {fileID: 2735702574291586817}
+  - component: {fileID: 4447381490520856793}
   m_Layer: 5
   m_Name: LevelButton
   m_TagString: Untagged
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1378754851191877176
+--- !u!114 &2735702574291586817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3744309898233183442
+--- !u!114 &4447381490520856793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,7 +265,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1378754851191877178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07e82cdce5cffb8419a48472d0630ba3, type: 3}
+  m_Script: {fileID: 11500000, guid: 44b9061692c865b4aa0cf2533bbcf66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 0
+  button: {fileID: 2735702574291586817}
+  text: {fileID: 1378754849302876677}

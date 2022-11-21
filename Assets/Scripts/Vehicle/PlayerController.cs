@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("References")]
+    private Rigidbody rb;
     [Header("Load")]
-    public GameObject truckLoad;
-    public GameObject groundLoad;
     public Transform[] unloadSpots;
     public Transform loadSpot;
+    public float pickUpRange;
+    public LayerMask loadLayer;
     [Header("Stats")]
     public float speed;
-    public float steerSpeed;
+    public float steerSpeedMultiplier;
     public float steerInput;
     public float accelerationInput;
     [Header("Wheels")]
@@ -22,10 +24,14 @@ public class PlayerController : MonoBehaviour
     public Transform[] inverseSteerWheels;
     public Transform[] rotatingWheels;
     [Header("Debug")]
-    public float angularVelocity;
-    public float rps;
-    public float wheelYAngle;
+    private float wheelAngularVelocity;
+    private float wheelRps;
+    private float wheelYAngle;
 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
@@ -33,17 +39,20 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //Inputs
         accelerationInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");
 
-        transform.position += transform.forward * accelerationInput * speed * Time.deltaTime;
-        transform.Rotate(Vector3.up * steerInput * steerSpeed * accelerationInput * Time.deltaTime);
+        //Movement
+        rb.MovePosition(transform.position + transform.forward * accelerationInput * speed * Time.deltaTime);
+        transform.Rotate(Vector3.up * steerInput * accelerationInput * steerSpeedMultiplier * Time.deltaTime);
 
-        rps = (speed * accelerationInput) / circumference;
-        angularVelocity = rps * 360 * Time.deltaTime;
+        //Wheel direction
+        wheelRps = (speed * accelerationInput) / circumference;
+        wheelAngularVelocity = wheelRps * 360 * Time.deltaTime;
         for (int i = 0; i < rotatingWheels.Length; i++)
         {       
-            rotatingWheels[i].Rotate(Vector3.right, angularVelocity, Space.Self);
+            rotatingWheels[i].Rotate(Vector3.right, wheelAngularVelocity, Space.Self);
         }
         wheelYAngle = Mathf.Lerp(0, maxSteerAngle * steerInput, Mathf.Abs(steerInput));
         for (int i = 0; i < steerWheels.Length; i++)
@@ -54,68 +63,75 @@ public class PlayerController : MonoBehaviour
 
     public void LoadOrUnload()
     {
-        if (truckLoad)
+        if (CheckHasLoad(out GameObject load))
         {
-            Unload();
+            Unload(load);
         }
-        else if (groundLoad)
+        else if (CheckHasLoadNear(out GameObject nearLoad))
         {
-            Load();
+            Load(nearLoad);
         }
     }
 
-    public void Unload()
+    public void Unload(GameObject load)
     {
-        if (truckLoad)
-        {
-            float range = 1f;
-            int layerMask = LayerMask.GetMask("Scene");
-            Transform unloadSpot = null;
-            for (int i = 0; i < unloadSpots.Length; i++)
-            {
-                if (Physics.OverlapSphere(unloadSpots[i].position, range, layerMask).Length == 0)
-                {
-                    unloadSpot = unloadSpots[i];
-                    break;
-                }
-            }
+        if (!load) return;
 
-            if (unloadSpot)
+        float range = 1f;
+        int layerMask = LayerMask.GetMask("Scene");
+        Transform unloadSpot = null;
+        for (int i = 0; i < unloadSpots.Length; i++)
+        {
+            if (Physics.OverlapSphere(unloadSpots[i].position, range, layerMask).Length == 0)
             {
-                truckLoad.transform.SetParent(null);
-                truckLoad.transform.position = unloadSpot.position;
-                groundLoad = truckLoad;
-                truckLoad = null;
+                unloadSpot = unloadSpots[i];
+                break;
             }
         }
-    }
 
-    public void Load()
-    {
-        if (groundLoad)
+        if (unloadSpot)
         {
-            groundLoad.transform.SetParent(transform);
-            groundLoad.transform.localPosition = loadSpot.localPosition;
-            groundLoad.transform.localRotation = Quaternion.identity;
-
-            truckLoad = groundLoad;
-            groundLoad = null;
+            load.transform.SetParent(null);
+            load.transform.position = unloadSpot.position;
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void Load(GameObject load)
     {
-        if (other.CompareTag("TruckLoad"))
-        {
-            groundLoad = other.gameObject;
-        }
+        if (!load) return;
+
+        load.transform.SetParent(transform);
+        load.transform.localPosition = loadSpot.localPosition;
+        load.transform.localRotation = Quaternion.identity;
     }
 
-    public void OnTriggerExit(Collider other)
+    public bool CheckHasLoad(out GameObject load)
     {
-        if (other.CompareTag("TruckLoad"))
+        Collider[] colliders = Physics.OverlapSphere(loadSpot.position, 0.2f, loadLayer);
+        if(colliders.Length > 0)
         {
-            groundLoad = null;
+            load = colliders[0].gameObject;
+            return true;
         }
+
+        load = null;
+        return false;
+    }
+    public bool CheckHasLoadNear(out GameObject load)
+    {
+        Collider[] colliders = Physics.OverlapSphere(loadSpot.position, 3f, loadLayer);
+        if (colliders.Length > 0)
+        {
+            load = colliders[0].gameObject;
+            return true;
+        }
+
+        load = null;
+        return false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(loadSpot.position, 0.2f);
     }
 }

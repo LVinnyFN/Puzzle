@@ -13,31 +13,21 @@ public class ColorManipulator : MonoBehaviour
     [Space]
     [SerializeField] protected Color manipulatedColor;
     [SerializeField] protected Renderer[] coloredObjects;
-
-    private void OnValidate()
+    private void Awake()
     {
-        foreach (Renderer renderer in coloredObjects)
-        {
-            try
-            {
-                Material material = new Material(renderer.sharedMaterial);
-                material.color = manipulatedColor;
-                renderer.material = material;
-            }
-            catch { }
-        }
+        SetOwnColor(manipulatedColor);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("TruckLoad") && other.TryGetComponent(out ColorAgent agent))
         {
-            onEnter?.Invoke(manipulatedColor);
+            onEnter?.Invoke(agent.MyColor);
             OnAgentEnter();
 
             if (agent.MyColor == manipulatedColor)
             {
-                onEnterWithColor?.Invoke(manipulatedColor);
+                onEnterWithColor?.Invoke(agent.MyColor);
                 OnAgentEnterWithColor();
             }
         }
@@ -46,14 +36,32 @@ public class ColorManipulator : MonoBehaviour
     {
         if (other.CompareTag("TruckLoad") && other.TryGetComponent(out ColorAgent agent))
         {
-            onExit?.Invoke(manipulatedColor);
+            onExit?.Invoke(agent.MyColor);
             OnAgentExit();
 
             if(agent.MyColor == manipulatedColor)
             {
-                onExitWithColor?.Invoke(manipulatedColor);
+                onExitWithColor?.Invoke(agent.MyColor);
                 OnAgentExitWithColor();
             }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = manipulatedColor;
+        foreach(Renderer obj in coloredObjects)
+        {
+            Gizmos.DrawWireMesh(obj.GetComponent<MeshFilter>().sharedMesh, obj.transform.position, obj.transform.rotation, obj.transform.localScale);
+        }
+    }
+
+
+    private void SetOwnColor(Color color)
+    {
+        foreach (Renderer renderer in coloredObjects)
+        {
+            renderer.material.color = color;
         }
     }
 

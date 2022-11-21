@@ -9,25 +9,7 @@ public class ColorChanger : ColorManipulator
         Set,
     }
 
-    [SerializeField] private Operator operation;
-
-    private void Awake()
-    {
-        SetOwnColor(manipulatedColor);
-    }
-    private void OnValidate()
-    {
-        foreach (Renderer renderer in coloredObjects)
-        {
-            try
-            {
-                Material material = new Material(renderer.sharedMaterial);
-                material.color = manipulatedColor;
-                renderer.material = material;
-            }
-            catch { }
-        }
-    }
+    [SerializeField] private Operator operation;  
 
     private void OnTriggerEnter(Collider other)
     {
@@ -51,13 +33,5 @@ public class ColorChanger : ColorManipulator
                 agent.SetColor(manipulatedColor);
                 break;
         }
-    }
-
-    private void SetOwnColor(Color color)
-    {
-        foreach(Renderer renderer in coloredObjects)
-        {
-            renderer.material.color = color;
-        }
-    }
+    }   
 }

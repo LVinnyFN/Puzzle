@@ -12,31 +12,27 @@ public class ColorAgent : MonoBehaviour
     {
         SetColor(color);
     }
-    protected virtual void OnValidate()
-    {
-        try
-        {
-            Material material = new Material(rend.sharedMaterial);
-            material.color = color;
-            rend.material = material;
-        }
-        catch { }
-    }
 
     public void AddColor(Color color)
     {
-        this.color = ColorManager.Instance.AddColor(this.color, color);
-        rend.sharedMaterial.color = this.color;
+        this.color = ColorManager.AddColor(this.color, color);
+        rend.material.color = this.color;
     }
     public void SubtractColor(Color color)
     {
-        this.color = ColorManager.Instance.SubtractColor(this.color, color);
-        rend.sharedMaterial.color = this.color;
+        this.color = ColorManager.SubtractColor(this.color, color);
+        rend.material.color = this.color;
     }
 
     public void SetColor(Color color)
     {
         this.color = color;
-        rend.sharedMaterial.color = this.color;
-    }    
+        rend.material.color = this.color;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = color;
+        Gizmos.DrawWireMesh(rend.GetComponent<MeshFilter>().sharedMesh, transform.position, transform.rotation);        
+    }
 }

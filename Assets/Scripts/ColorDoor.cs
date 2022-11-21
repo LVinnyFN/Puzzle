@@ -8,16 +8,18 @@ public class ColorDoor : MonoBehaviour
     public Vector3 closedSpot, openOffset;
     public bool isOpen;
     public bool isMoving;
-    public float openPercentage;
-    public float openingDuration;
+    [Range(0,1)]public float openPercentage;
+    [Min(0)]public float openingDuration;
 
-    public Coroutine movingCoroutine;
+    public Coroutine movingCoroutine;   
 
+    [ContextMenu("Open")]
     public void Open()
     {
         if(movingCoroutine != null) StopCoroutine(movingCoroutine);
         movingCoroutine = StartCoroutine(OpenCoroutine());
     }
+    [ContextMenu("Close")]
     public void Close()
     {
         if (movingCoroutine != null) StopCoroutine(movingCoroutine);
@@ -63,6 +65,6 @@ public class ColorDoor : MonoBehaviour
 
     private void OnValidate()
     {
-        doorFrame.transform.localPosition = isOpen ? closedSpot + openOffset : closedSpot;
+        SetDoor();
     }
 }

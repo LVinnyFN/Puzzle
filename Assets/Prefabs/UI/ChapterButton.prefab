@@ -146,9 +146,7 @@ GameObject:
   - component: {fileID: 1378754851191877174}
   - component: {fileID: 1378754851191877177}
   - component: {fileID: 1378754851191877176}
-  - component: {fileID: 2077673882205433891}
-  - component: {fileID: 3724120528851590785}
-  - component: {fileID: 5442423727989467173}
+  - component: {fileID: 466071756125675341}
   m_Layer: 5
   m_Name: ChapterButton
   m_TagString: Untagged
@@ -258,7 +256,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2077673882205433891
+--- !u!114 &466071756125675341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,35 +265,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1378754851191877178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1699c4324c56194c86bc203138c4945, type: 3}
+  m_Script: {fileID: 11500000, guid: 44b9061692c865b4aa0cf2533bbcf66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldIndex: 0
---- !u!114 &3724120528851590785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378754851191877178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f741e41e661205469ab8dfb7f73d460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onOffSwitcher: {fileID: 0}
---- !u!114 &5442423727989467173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378754851191877178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbf7fac3971487b45a11905ba374ff81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnObjects: []
-  OffObjects:
-  - {fileID: 1378754851191877178}
+  button: {fileID: 1378754851191877176}
+  text: {fileID: 1378754849302876677}
