@@ -407,6 +407,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0217fff17e42e6f46b9aff327b1b35bd, type: 3}
+--- !u!114 &705257069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3494551354637078081, guid: fa0c5b1d469b6c743b2b1d72c5d749b6, type: 3}
+  m_PrefabInstance: {fileID: 1566853621}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad17b2487e8ac3049ad55c4d5f3ee53b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &935769566 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2833188117780034149, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
@@ -1189,14 +1200,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6467080275585055791}
     m_Modifications:
-    - target: {fileID: 2679490285464547265, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2833188117780034149, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4383285935187549254, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
+      propertyPath: activators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383285935187549254, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
+      propertyPath: activators.Array.data[0]
+      value: 
+      objectReference: {fileID: 705257069}
     - target: {fileID: 5259086127875482422, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1242,16 +1257,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8302615901833455221, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
-      propertyPath: isOpen
+      propertyPath: color.a
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8302615901833455221, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
-      propertyPath: isMoving
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8302615901833455221, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
-      propertyPath: openPercentage
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}

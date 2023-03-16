@@ -3,70 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ColorManipulator : MonoBehaviour
+namespace LVin.ColorPzl.Core
 {
-    [Header("Events")]
-    public UnityEvent<Color> onEnter;
-    public UnityEvent<Color> onEnterWithColor;
-    public UnityEvent<Color> onExit;
-    public UnityEvent<Color> onExitWithColor;
-    [Space]
-    [SerializeField] protected Color manipulatedColor;
-    [SerializeField] protected Renderer[] coloredObjects;
-    private void Awake()
+    public class ColorManipulator : MonoBehaviour
     {
-        SetOwnColor(manipulatedColor);
-    }
+        [SerializeField] protected Color manipulatedColor;
+        [SerializeField] protected Renderer[] coloredObjects;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("TruckLoad") && other.TryGetComponent(out ColorAgent agent))
+        private void Awake()
         {
-            onEnter?.Invoke(agent.MyColor);
-            OnAgentEnter();
+            SetOwnColor(manipulatedColor);
+        }
 
-            if (agent.MyColor == manipulatedColor)
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = manipulatedColor;
+            foreach (Renderer obj in coloredObjects)
             {
-                onEnterWithColor?.Invoke(agent.MyColor);
-                OnAgentEnterWithColor();
+                Gizmos.DrawWireMesh(obj.GetComponent<MeshFilter>().sharedMesh, obj.transform.position, obj.transform.rotation, obj.transform.localScale);
+            }
+        }
+
+        private void SetOwnColor(Color color)
+        {
+            foreach (Renderer renderer in coloredObjects)
+            {
+                renderer.material.color = color;
             }
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("TruckLoad") && other.TryGetComponent(out ColorAgent agent))
-        {
-            onExit?.Invoke(agent.MyColor);
-            OnAgentExit();
-
-            if(agent.MyColor == manipulatedColor)
-            {
-                onExitWithColor?.Invoke(agent.MyColor);
-                OnAgentExitWithColor();
-            }
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = manipulatedColor;
-        foreach(Renderer obj in coloredObjects)
-        {
-            Gizmos.DrawWireMesh(obj.GetComponent<MeshFilter>().sharedMesh, obj.transform.position, obj.transform.rotation, obj.transform.localScale);
-        }
-    }
-
-
-    private void SetOwnColor(Color color)
-    {
-        foreach (Renderer renderer in coloredObjects)
-        {
-            renderer.material.color = color;
-        }
-    }
-
-    public virtual void OnAgentEnter() { }
-    public virtual void OnAgentExit() { }
-    public virtual void OnAgentEnterWithColor() { }
-    public virtual void OnAgentExitWithColor() { }
 }

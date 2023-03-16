@@ -12,8 +12,8 @@ public class GameController : MonoBehaviour
     {
         if (instance) Destroy(this);
         else instance = this;
-    }
 
+    }
 
     private void Update()
     {
@@ -29,8 +29,6 @@ public class GameController : MonoBehaviour
 
     private IEnumerator OnPlayerReachGoalCoroutine()
     {
-        Debug.Log("Player won! I will do something about it soon.");
-
         yield return new WaitForSeconds(2f);
 
         int chapter = SceneLoader.currentChapter;

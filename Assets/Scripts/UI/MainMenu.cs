@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
         };
 
         chapterSelectionMenu.RegenerateInterface();
-        foreach (var menu in menus)
+        foreach (Menu menu in menus)
         {
             menu.Initialize();
             menu.mainMenu = this;

@@ -171,9 +171,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2731735539226949859}
-  - component: {fileID: 2459957898051434733}
-  - component: {fileID: 2813745245207061656}
   - component: {fileID: 4001395793553629644}
+  - component: {fileID: 2459957898051434733}
+  - component: {fileID: 5080944293366440}
+  - component: {fileID: 3494551354637078081}
   m_Layer: 0
   m_Name: BoxHolder
   m_TagString: Untagged
@@ -203,6 +204,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4001395793553629644
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092351876065699874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2459957898051434733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +242,7 @@ MonoBehaviour:
   - {fileID: 7660102324116206022}
   collider: {fileID: 4001395793553629644}
   cornerFactor: 10
---- !u!114 &2813745245207061656
+--- !u!114 &5080944293366440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,22 +251,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5092351876065699874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c41f20b6624999499df3542545cbdfd, type: 3}
+  m_Script: {fileID: 11500000, guid: c14802aa5fa0cc245a59f260e7bab79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onEnterWithColor:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
-  onExitWithColor:
-    m_PersistentCalls:
-      m_Calls: []
-  manipulatedColor: {r: 1, g: 0, b: 0, a: 1}
+  manipulatedColor: {r: 1, g: 1, b: 1, a: 1}
   coloredObjects:
   - {fileID: 9053471416956033465}
   - {fileID: 1524220744306122425}
@@ -262,19 +264,57 @@ MonoBehaviour:
   - {fileID: 1417219373363848299}
   - {fileID: 3846551968012433183}
   - {fileID: 6722902946843105144}
---- !u!65 &4001395793553629644
-BoxCollider:
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnterRightColor:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3494551354637078081}
+        m_TargetAssemblyTypeName: ColorActivator, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onExitRightColor:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3494551354637078081}
+        m_TargetAssemblyTypeName: ColorActivator, Assembly-CSharp
+        m_MethodName: Deactivate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3494551354637078081
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5092351876065699874}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad17b2487e8ac3049ad55c4d5f3ee53b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSwitchState:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5502017349876989766
 GameObject:
   m_ObjectHideFlags: 0

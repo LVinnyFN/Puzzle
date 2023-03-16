@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6673644190924654269}
   - component: {fileID: 2614065471055549095}
   - component: {fileID: 4601196316189169536}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Load
   m_TagString: TruckLoad
   m_Icon: {fileID: 0}
@@ -109,4 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 1, b: 1, a: 1}
-  rend: {fileID: 6673644190924654269}
+  render: {fileID: 6673644190924654269}

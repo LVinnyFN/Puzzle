@@ -730,6 +730,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6467080275585055791}
     m_Modifications:
+    - target: {fileID: 5080944293366440, guid: fa0c5b1d469b6c743b2b1d72c5d749b6, type: 3}
+      propertyPath: manipulatedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080944293366440, guid: fa0c5b1d469b6c743b2b1d72c5d749b6, type: 3}
+      propertyPath: manipulatedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080944293366440, guid: fa0c5b1d469b6c743b2b1d72c5d749b6, type: 3}
+      propertyPath: manipulatedColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 214911740734029691, guid: fa0c5b1d469b6c743b2b1d72c5d749b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
@@ -969,6 +981,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2731735539226949859, guid: fa0c5b1d469b6c743b2b1d72c5d749b6, type: 3}
   m_PrefabInstance: {fileID: 1566853621}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1566853623 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3494551354637078081, guid: fa0c5b1d469b6c743b2b1d72c5d749b6, type: 3}
+  m_PrefabInstance: {fileID: 1566853621}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad17b2487e8ac3049ad55c4d5f3ee53b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1571692018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1472,6 +1495,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4383285935187549254, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
+      propertyPath: activators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383285935187549254, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
+      propertyPath: activators.Array.data[0]
+      value: 
+      objectReference: {fileID: 1566853623}
     - target: {fileID: 5259086127875482422, guid: 75bd69e1842662d4db873876fb6a24b9, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -23,6 +23,7 @@ public class ChapterSelectionMenu : Menu
     [ContextMenu("Regenerate Interface")]
     public void RegenerateInterface()
     {
+        //Destroy and clear
         {
             foreach (LevelSelectionMenu levelSelectionMenu in levelSelectionMenuList)
             {
@@ -36,6 +37,7 @@ public class ChapterSelectionMenu : Menu
             chapterButtonList.Clear();
         }
 
+        //Recreate
         {
             for(int i = 0; i < chapters; i++)
             {

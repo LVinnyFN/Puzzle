@@ -36,9 +36,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F)) LoadOrUnload();
-    }
-    private void FixedUpdate()
-    {
+
         //Inputs
         accelerationInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");

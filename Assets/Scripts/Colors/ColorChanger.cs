@@ -1,37 +1,40 @@
 using UnityEngine;
 
-public class ColorChanger : ColorManipulator
+namespace LVin.ColorPzl.Core
 {
-    enum Operator
+    public class ColorChanger : ColorManipulator
     {
-        Add,
-        Subtract,
-        Set,
-    }
-
-    [SerializeField] private Operator operation;  
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("TruckLoad") && other.TryGetComponent(out ColorAgent agent))
+        enum Operator
         {
-            ChangeColor(agent);
+            Add,
+            Subtract,
+            Set,
+        }
+
+        [SerializeField] private Operator operation;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("TruckLoad") && other.TryGetComponent(out ColorAgent agent))
+            {
+                ChangeColor(agent);
+            }
+        }
+
+        private void ChangeColor(ColorAgent agent)
+        {
+            switch (operation)
+            {
+                case Operator.Add:
+                    agent.AddColor(manipulatedColor);
+                    break;
+                case Operator.Subtract:
+                    agent.SubtractColor(manipulatedColor);
+                    break;
+                case Operator.Set:
+                    agent.SetColor(manipulatedColor);
+                    break;
+            }
         }
     }
-
-    private void ChangeColor(ColorAgent agent)
-    {
-        switch (operation)
-        {
-            case Operator.Add:
-                agent.AddColor(manipulatedColor);
-                break;
-            case Operator.Subtract:
-                agent.SubtractColor(manipulatedColor);
-                break;
-            case Operator.Set:
-                agent.SetColor(manipulatedColor);
-                break;
-        }
-    }   
 }
